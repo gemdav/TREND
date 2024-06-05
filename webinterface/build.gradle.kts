@@ -13,8 +13,13 @@ val kvisionVersion = "7.5.0"
 val webDir = file("src/jsMain/web")
 
 plugins {
+<<<<<<< HEAD
     val kotlinVersion = "2.0.0"
     val kvisionVersion = "7.5.0"
+=======
+    val kotlinVersion = "1.9.23"
+    val kvisionVersion = "7.4.5"
+>>>>>>> parent of 340ae2a (build(deps): upgrade to Kotlin 2.0.0 and Gradle 8.5 (#55))
 
     kotlin("plugin.serialization") version kotlinVersion
     kotlin("multiplatform") version kotlinVersion
@@ -53,10 +58,16 @@ kotlin {
                 Action {
                     mainOutputFileName = "main.bundle.js"
                     sourceMaps = false
-                    devServerProperty =
+                    devServer =
                         KotlinWebpackConfig.DevServer(
                             open = false,
                             port = 3000,
+                            proxy =
+                                mutableMapOf(
+                                    "/kv/*" to "http://localhost:8080",
+                                    "/kvws/*" to
+                                        mapOf("target" to "ws://localhost:8080", "ws" to true),
+                                ),
                             static = mutableListOf("$buildDir/processedResources/js/main"),
                         )
                 },

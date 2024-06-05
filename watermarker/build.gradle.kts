@@ -5,9 +5,10 @@
  * that can be found in the LICENSE file.
  */
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 
 plugins {
-    kotlin("multiplatform") version "2.0.0"
+    kotlin("multiplatform") version "1.9.23"
     id("maven-publish")
     id("org.jetbrains.dokka") version "1.9.20"
     id("org.jlleitschuh.gradle.ktlint") version "12.1.1"
@@ -23,24 +24,17 @@ repositories {
 }
 
 kotlin {
-    compilerOptions {
-        freeCompilerArgs.add("-opt-in=kotlin.js.ExperimentalJsExport")
-        freeCompilerArgs.add("-Xexpect-actual-classes")
-    }
-
-    jvmToolchain(17)
     jvm {
+        jvmToolchain(17)
         withJava()
         testRuns["test"].executionTask.configure {
             useJUnitPlatform()
         }
     }
-
     js(IR) {
         browser { }
         binaries.executable()
     }
-
     sourceSets {
         val commonMain by getting {
             dependencies {
@@ -64,6 +58,13 @@ kotlin {
             }
         }
         val jsTest by getting
+    }
+}
+
+tasks.withType<KotlinCompilationTask<*>>().configureEach {
+    compilerOptions {
+        freeCompilerArgs.add("-opt-in=kotlin.js.ExperimentalJsExport")
+        freeCompilerArgs.add("-Xexpect-actual-classes")
     }
 }
 
