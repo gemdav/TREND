@@ -598,6 +598,7 @@ fun Result<List<Watermark>>.toTrendmarks(source: String = "Trendmark"): Result<L
     }
 }
 
+@JsExport
 class RawWatermark(content: List<Byte>) : Trendmark(content) {
     companion object {
         const val SOURCE = "Trendmark.RawWatermark"
@@ -625,6 +626,7 @@ class RawWatermark(content: List<Byte>) : Trendmark(content) {
     override fun getContent() = Result.success(watermarkContent.drop(TAG_SIZE))
 }
 
+@JsExport
 class SizedWatermark(content: List<Byte>) : Trendmark(content), Trendmark.Sized {
     companion object {
         const val SOURCE = "Trendmark.SizedWatermark"
@@ -676,6 +678,7 @@ class SizedWatermark(content: List<Byte>) : Trendmark(content), Trendmark.Sized 
     override fun getSizeRange(): IntRange = SIZE_START_INDEX..SIZE_END_INDEX
 }
 
+@JsExport
 class CRC32Watermark(content: List<Byte>) : Trendmark(content), Trendmark.Checksum {
     companion object {
         const val SOURCE = "Trendmark.CRC32Watermark"
@@ -743,6 +746,7 @@ class CRC32Watermark(content: List<Byte>) : Trendmark(content), Trendmark.Checks
     }
 }
 
+@JsExport
 class SizedCRC32Watermark(content: List<Byte>) :
     Trendmark(content), Trendmark.Sized, Trendmark.Checksum {
     companion object {
@@ -817,6 +821,7 @@ class SizedCRC32Watermark(content: List<Byte>) :
     }
 }
 
+@JsExport
 class SHA3256Watermark(content: List<Byte>) : Trendmark(content), Trendmark.Hash {
     companion object {
         const val SOURCE = "Trendmark.SHA3256Watermark"
@@ -887,6 +892,7 @@ class SHA3256Watermark(content: List<Byte>) : Trendmark(content), Trendmark.Hash
     }
 }
 
+@JsExport
 class SizedSHA3256Watermark(content: List<Byte>) :
     Trendmark(content), Trendmark.Sized, Trendmark.Hash {
     companion object {
@@ -963,6 +969,7 @@ class SizedSHA3256Watermark(content: List<Byte>) :
     }
 }
 
+@JsExport
 class CompressedRawWatermark(content: List<Byte>) : Trendmark(content), Trendmark.Compressed {
     companion object {
         const val SOURCE = "Trendmark.CompressedRawWatermark"
@@ -991,6 +998,7 @@ class CompressedRawWatermark(content: List<Byte>) : Trendmark(content), Trendmar
     }
 }
 
+@JsExport
 class CompressedSizedWatermark(content: List<Byte>) :
     Trendmark(content), Trendmark.Sized, Trendmark.Compressed {
     companion object {
@@ -1024,6 +1032,7 @@ class CompressedSizedWatermark(content: List<Byte>) :
         SizedWatermark.SIZE_START_INDEX..SizedWatermark.SIZE_END_INDEX
 }
 
+@JsExport
 class CompressedCRC32Watermark(content: List<Byte>) :
     Trendmark(content), Trendmark.Compressed, Trendmark.Checksum {
     companion object {
@@ -1075,6 +1084,7 @@ class CompressedCRC32Watermark(content: List<Byte>) :
     }
 }
 
+@JsExport
 class CompressedSizedCRC32Watermark(content: List<Byte>) :
     Trendmark(content), Trendmark.Sized, Trendmark.Checksum {
     companion object {
@@ -1136,6 +1146,7 @@ class CompressedSizedCRC32Watermark(content: List<Byte>) :
     }
 }
 
+@JsExport
 class CompressedSHA3256Watermark(content: List<Byte>) :
     Trendmark(content), Trendmark.Compressed, Trendmark.Hash {
     companion object {
@@ -1190,6 +1201,7 @@ class CompressedSHA3256Watermark(content: List<Byte>) :
     }
 }
 
+@JsExport
 class CompressedSizedSHA3256Watermark(content: List<Byte>) :
     Trendmark(content), Trendmark.Compressed, Trendmark.Sized, Trendmark.Hash {
     companion object {
