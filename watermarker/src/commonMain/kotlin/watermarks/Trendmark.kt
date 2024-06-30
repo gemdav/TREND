@@ -22,7 +22,6 @@ import org.kotlincrypto.hash.sha3.SHA3_256
 import kotlin.collections.ArrayList
 import kotlin.js.JsExport
 
-@JsExport
 sealed interface TrendmarkInterface {
     companion object {
         /** Number of bytes used as tag representing the type of the watermark */
